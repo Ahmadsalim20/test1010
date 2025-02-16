@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <link rel="stylesheet" href="styles_login.css">
+    <style>
+        .error-message {
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 500px;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: right;
+            direction: rtl;
+            color: #ffffff;
+            background-color: #d9534f;
+            border: 1px solid #d43f3a;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-family: 'Arial', sans-serif;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .error-message.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const errorDiv = document.querySelector(".error-message");
+            if (errorDiv) {
+                setTimeout(() => {
+                    errorDiv.classList.add("hidden");
+                }, 3000); // بعد 3 ثوانٍ
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2 class="form-title">تسجيل الدخول</h2>
+            
+            <!-- عرض رسالة الخطأ إذا كانت موجودة -->
+            <?php if (!empty($error_message)): ?>
+                <div class="error-message">
+                    <?php echo htmlspecialchars($error_message); ?>
+                </div>
+            <?php endif; ?>
+
+            <form action="login.php" method="POST">
+                <div class="form-group">
+                    <label for="user_email">البريد الإلكتروني</label>
+                    <input type="email" id="user_email" name="user_email" value="<?php echo isset($_GET['user_email']) ? $_GET['user_email'] : ''; ?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="user_password">كلمة المرور</label>
+                    <input type="password" id="user_password" name="user_password" required>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="remember_me"> تذكرني في المرة القادمة
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">تسجيل الدخول</button>
+                </div>
+            </form>
+            <div class="form-footer">
+                <p>ليس لديك حساب؟ <a href="signup.html">إنشاء حساب جديد</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
